@@ -1,13 +1,12 @@
-import os
-import subprocess
 import json
 import os
 import subprocess
 import sys
-import textwrap
 import urllib.request
 
 from tqdm import tqdm
+
+from common import has_previously_installed_successfully, mark_as_failed
 
 URL = 'https://hugovk.github.io/top-pypi-packages/top-pypi-packages-30-days.json'
 FILENAME = 'top-pypi-packages-30-days.json'
@@ -16,22 +15,6 @@ BLACKLIST = {
     'typing-extensions',
 }
 COUNT = 1000
-
-
-MARK_INSTALLED_DIR = os.path.join('cache', 'installed')
-MARK_FAILED_DIR = os.path.join('cache', 'failed')
-
-
-def has_previously_installed_successfully(package):
-    package_file = os.path.join(MARK_INSTALLED_DIR, package)
-    return os.path.exists(package_file)
-
-
-def mark_as_failed(package):
-    os.makedirs(MARK_FAILED_DIR, exist_ok=True)
-    package_file = os.path.join(MARK_FAILED_DIR, package)
-    with open(package_file, 'wb'):
-        pass
 
 
 def try_installing(package):
@@ -43,12 +26,30 @@ def try_installing(package):
         subprocess.run(cmd, check=True)
     except KeyboardInterrupt:
         sys.exit(1)
-    except:
+    except:  # noqa
         print(f'MARKING {package} AS FAILED from MAIN!')
         mark_as_failed(package)
 
 
 def main():
+    data = get_pypi_package_names()
+
+    for row in tqdm(data['rows'][:COUNT]):
+        project = row['project']
+        if project in BLACKLIST:
+            continue
+
+        if has_previously_installed_successfully(project):
+            print(f'Skipping {project}')
+            continue
+
+        print('\r' + '#' * 80)
+        print(project)
+
+        try_installing(project)
+
+
+def get_pypi_package_names():
     if not os.path.isfile(ABS_FILE):
         print('Not in cache, downloading...')
         with urllib.request.urlopen(URL) as f:
@@ -59,17 +60,7 @@ def main():
     with open(ABS_FILE) as f:
         data = json.load(f)
 
-        for row in tqdm(data['rows'][:COUNT]):
-            project = row['project']
-            if project in BLACKLIST:
-                continue
-
-            if has_previously_installed_successfully(project):
-                print(f'Skipping {project}')
-                continue
-            print('\r' + '#' * 80)
-            print(project)
-            try_installing(project)
+    return data
 
 
 if __name__ == '__main__':

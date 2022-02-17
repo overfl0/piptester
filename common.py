@@ -1,6 +1,11 @@
 import os
 import shutil
+import subprocess
 from contextlib import contextmanager
+
+
+MARK_INSTALLED_DIR = os.path.join('cache', 'installed')
+MARK_FAILED_DIR = os.path.join('cache', 'failed')
 
 
 @contextmanager
@@ -23,3 +28,28 @@ def print_and_delete(message, *path):
         shutil.rmtree(full_path)
     else:
         print('Error: I don\'t know what this file type is!')
+
+
+def has_previously_installed_successfully(package):
+    package_file = os.path.join(MARK_INSTALLED_DIR, package)
+    return os.path.exists(package_file)
+
+
+def mark_as_installed_successfully(package):
+    print(f'MARKING {package} AS SUCCESSFUL!')
+    os.makedirs(MARK_INSTALLED_DIR, exist_ok=True)
+    package_file = os.path.join(MARK_INSTALLED_DIR, package)
+    with open(package_file, 'wb'):
+        pass
+
+
+def mark_as_failed(package):
+    os.makedirs(MARK_FAILED_DIR, exist_ok=True)
+    package_file = os.path.join(MARK_FAILED_DIR, package)
+    with open(package_file, 'wb'):
+        pass
+
+
+def verbose_run(cmd):
+    print(' '.join(cmd), flush=True)
+    subprocess.run(cmd, check=True)

@@ -1,39 +1,11 @@
 import argparse
 import importlib
 import os
-import subprocess
 import sys
 
 import pkg_resources
 
-
-MARK_INSTALLED_DIR = os.path.join('cache', 'installed')
-MARK_FAILED_DIR = os.path.join('cache', 'failed')
-
-
-def has_previously_installed_successfully(package):
-    package_file = os.path.join(MARK_INSTALLED_DIR, package)
-    return os.path.exists(package_file)
-
-
-def mark_as_installed_successfully(package):
-    print(f'MARKING {package} AS SUCCESSFUL!')
-    os.makedirs(MARK_INSTALLED_DIR, exist_ok=True)
-    package_file = os.path.join(MARK_INSTALLED_DIR, package)
-    with open(package_file, 'wb'):
-        pass
-
-
-def mark_as_failed(package):
-    os.makedirs(MARK_FAILED_DIR, exist_ok=True)
-    package_file = os.path.join(MARK_FAILED_DIR, package)
-    with open(package_file, 'wb'):
-        pass
-
-
-def verbose_run(cmd):
-    print(' '.join(cmd), flush=True)
-    subprocess.run(cmd, check=True)
+from common import has_previously_installed_successfully, mark_as_installed_successfully, verbose_run
 
 
 def try_installing(package):
