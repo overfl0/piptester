@@ -6,7 +6,7 @@ import urllib.request
 
 from tqdm import tqdm
 
-from common import has_previously_installed_successfully, mark_as_failed
+from common import has_previously_installed_successfully, mark_as_failed, verbose_run
 
 URL = 'https://hugovk.github.io/top-pypi-packages/top-pypi-packages-30-days.json'
 FILENAME = 'top-pypi-packages-30-days.json'
@@ -21,14 +21,20 @@ def try_installing(package):
     interpreter = 'python-37-embed-amd64/python.exe'
     docker = ['docker', 'run', '--rm', '-v', f'{os.path.join(os.getcwd(), "cache")}:c:\\cache', 'piptester']
     cmd = docker + [interpreter, 'test_package.py', 'install', package]
-    print(' '.join(cmd))
+
     try:
-        subprocess.run(cmd, check=True)
+        proc = verbose_run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        output, _ = proc.communicate()
     except KeyboardInterrupt:
         sys.exit(1)
-    except:  # noqa
+    except subprocess.CalledProcessError as exc:  # noqa
         print(f'MARKING {package} AS FAILED from MAIN!')
         mark_as_failed(package)
+        output = exc.output
+
+    print(output.decode('utf8', 'replace'))
+    with open(os.path.join('logs', package + '.txt'), 'wb') as f:
+        f.write(output)
 
 
 def main():

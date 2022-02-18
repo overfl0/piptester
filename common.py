@@ -50,6 +50,6 @@ def mark_as_failed(package):
         pass
 
 
-def verbose_run(cmd):
+def verbose_run(cmd, **kwargs):
     print(' '.join(cmd), flush=True)
-    subprocess.run(cmd, check=True)
+    subprocess.run(cmd, check=True, **kwargs)
