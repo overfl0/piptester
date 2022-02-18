@@ -61,6 +61,9 @@ jobs:
         run: tar xf ../python-${{ env.PYTHON_VERSION }}-${{ runner.os }}.tar
         working-directory: python
 
+      - name: Install rependencies
+        run: python\python-37-embed-amd64\python.exe -m pip install requirements.txt
+
       - name: Create Docker container
         run: docker build -t piptester .
 
