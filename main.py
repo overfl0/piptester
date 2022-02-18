@@ -1,3 +1,4 @@
+import argparse
 import json
 import os
 import subprocess
@@ -6,7 +7,7 @@ import urllib.request
 
 from tqdm import tqdm
 
-from common import has_previously_installed_successfully, mark_as_failed, verbose_run
+from common import has_previously_installed_successfully, mark_as_failed, verbose_run, chunks
 
 URL = 'https://hugovk.github.io/top-pypi-packages/top-pypi-packages-30-days.json'
 FILENAME = 'top-pypi-packages-30-days.json'
@@ -37,10 +38,10 @@ def try_installing(package):
         f.write(output)
 
 
-def main():
-    data = get_pypi_package_names()
+def main(args):
+    data = list(chunks(get_pypi_package_names()['rows'], 50))[args.chunk]
 
-    for row in tqdm(data['rows'][:COUNT]):
+    for row in tqdm(data[:COUNT]):
         project = row['project']
         if project in BLACKLIST:
             continue
@@ -70,7 +71,11 @@ def get_pypi_package_names():
 
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('chunk', type=int)
+    args = parser.parse_args()
+
+    main(args)
 
 
 # docker build -t piptester .

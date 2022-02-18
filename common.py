@@ -53,3 +53,10 @@ def mark_as_failed(package):
 def verbose_run(cmd, **kwargs):
     print(' '.join(cmd), flush=True)
     subprocess.run(cmd, check=True, **kwargs)
+
+
+def chunks(lst, n):
+    """Yield successive n-sized chunks from lst."""
+    lst = list(lst)
+    for i in range(0, len(lst), n):
+        yield lst[i:i + n]
