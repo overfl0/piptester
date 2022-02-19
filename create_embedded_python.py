@@ -112,14 +112,14 @@ def prepare_distro(basedir, version, arch, install_pip=True):
         stdlib_zip_file.extractall(stdlib_path)
 
         # # Python 3.6 and above
-        # if int(version_with_minor[1:]) >= 6:
-        #     # import site when executing python.exe (doesn't apply to the embedded
-        #     # version) which gives access to site-packages and that allows pip (and
-        #     # other packages) to be accessed
-        #     _pth = os.path.join(directory,
-        #                         'python{version_with_minor}._pth'.format(version_with_minor=version_with_minor))
-        #     with open(_pth, 'a') as f:
-        #         f.write('import site\n')
+        if int(version_with_minor[1:]) >= 6:
+            # import site when executing python.exe (doesn't apply to the embedded
+            # version) which gives access to site-packages and that allows pip (and
+            # other packages) to be accessed
+            _pth = os.path.join(directory,
+                                'python{version_with_minor}._pth'.format(version_with_minor=version_with_minor))
+            with open(_pth, 'a') as f:
+                f.write('import site\n')
 
     else:  # Linux
         python_tar_file = tarfile.open(None, "r:bz2", BytesIO(file_raw))
