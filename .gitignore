@@ -1,5 +1,3 @@
-cache
-logs
 .idea
 __pycache__
 top-pypi-packages-30-days.json
