@@ -25,7 +25,7 @@ def try_installing(package):
 
     try:
         proc = verbose_run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-        output, _ = proc.communicate()
+        output = proc.stdout
     except KeyboardInterrupt:
         sys.exit(1)
     except subprocess.CalledProcessError as exc:  # noqa

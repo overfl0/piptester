@@ -52,7 +52,7 @@ def mark_as_failed(package):
 
 def verbose_run(cmd, **kwargs):
     print(' '.join(cmd), flush=True)
-    subprocess.run(cmd, check=True, **kwargs)
+    return subprocess.run(cmd, check=True, **kwargs)
 
 
 def chunks(lst, n):

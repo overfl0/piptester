@@ -5,6 +5,10 @@ import sys
 
 import pkg_resources
 
+
+sys.path.append(os.path.dirname(__file__))
+
+
 from common import has_previously_installed_successfully, mark_as_installed_successfully, verbose_run
 
 
