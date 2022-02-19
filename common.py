@@ -4,8 +4,8 @@ import subprocess
 from contextlib import contextmanager
 
 
-MARK_INSTALLED_DIR = os.path.join('cache', 'installed')
-MARK_FAILED_DIR = os.path.join('cache', 'failed')
+MARK_INSTALLED_DIR = os.path.join('logs', 'installed')
+MARK_FAILED_DIR = os.path.join('logs', 'failed')
 
 
 @contextmanager
@@ -30,24 +30,25 @@ def print_and_delete(message, *path):
         print('Error: I don\'t know what this file type is!')
 
 
-def has_previously_installed_successfully(package):
+def has_installed_successfully(package):
     package_file = os.path.join(MARK_INSTALLED_DIR, package)
     return os.path.exists(package_file)
 
 
-def mark_as_installed_successfully(package):
+def mark_as_installed_successfully(package, output=b''):
     print(f'MARKING {package} AS SUCCESSFUL!')
     os.makedirs(MARK_INSTALLED_DIR, exist_ok=True)
     package_file = os.path.join(MARK_INSTALLED_DIR, package)
-    with open(package_file, 'wb'):
-        pass
+    with open(package_file, 'wb') as f:
+        f.write(output)
 
 
-def mark_as_failed(package):
+def mark_as_failed(package, output=b''):
+    print(f'MARKING {package} AS FAILED from MAIN!')
     os.makedirs(MARK_FAILED_DIR, exist_ok=True)
     package_file = os.path.join(MARK_FAILED_DIR, package)
-    with open(package_file, 'wb'):
-        pass
+    with open(package_file, 'wb') as f:
+        f.write(output)
 
 
 def verbose_run(cmd, **kwargs):

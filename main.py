@@ -7,7 +7,7 @@ import urllib.request
 
 from tqdm import tqdm
 
-from common import has_previously_installed_successfully, mark_as_failed, verbose_run, chunks
+from common import has_installed_successfully, mark_as_failed, verbose_run, chunks, mark_as_installed_successfully
 
 URL = 'https://hugovk.github.io/top-pypi-packages/top-pypi-packages-30-days.json'
 FILENAME = 'top-pypi-packages-30-days.json'
@@ -19,8 +19,10 @@ COUNT = 1000
 
 
 def try_installing(package):
-    interpreter = 'python-37-embed-amd64/python.exe'
-    docker = ['docker', 'run', '--rm', '-v', f'{os.path.join(os.getcwd(), "cache")}:c:\\cache', 'piptester']
+    interpreter = 'c:/python-37-embed-amd64/python.exe'
+    docker = ['docker', 'run', '--rm', '-w', 'c:\\data',
+              '-v', f'{os.path.abspath(os.path.dirname(__file__))}:c:\\data',
+              'piptester']
     cmd = docker + [interpreter, 'test_package.py', 'install', package]
 
     try:
@@ -29,9 +31,12 @@ def try_installing(package):
     except KeyboardInterrupt:
         sys.exit(1)
     except subprocess.CalledProcessError as exc:  # noqa
-        print(f'MARKING {package} AS FAILED from MAIN!')
-        mark_as_failed(package)
         output = exc.output
+        mark_as_failed(package, output)
+
+    # Re-mark as successful but this time along with the installation logs
+    if has_installed_successfully(package):
+        mark_as_installed_successfully(package, output)
 
     print(output.decode('utf8', 'replace'))
     with open(os.path.join('logs', package + '.txt'), 'wb') as f:
@@ -46,7 +51,7 @@ def main(args):
         if project in BLACKLIST:
             continue
 
-        if has_previously_installed_successfully(project):
+        if has_installed_successfully(project):
             print(f'Skipping {project}')
             continue
 

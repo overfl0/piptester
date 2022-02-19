@@ -9,11 +9,11 @@ import pkg_resources
 sys.path.append(os.path.dirname(__file__))
 
 
-from common import has_previously_installed_successfully, mark_as_installed_successfully, verbose_run
+from common import has_installed_successfully, mark_as_installed_successfully, verbose_run
 
 
 def try_installing(package):
-    if has_previously_installed_successfully(package):
+    if has_installed_successfully(package):
         print(f'Package {package} was previously installed successfully, skipping...', flush=True)
         return
 
