@@ -65,7 +65,7 @@ jobs:
         run: python -m pip install -r requirements.txt
 
       - name: Create Docker container
-        run: docker build -t piptester .
+        run: docker build -t piptester --build-arg BASE_IMAGE=mcr.microsoft.com/windows/servercore:ltsc2019 .
 
       - name: Do installs
         run: python main.py ${{ matrix.chunks }}
