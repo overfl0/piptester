@@ -31,14 +31,14 @@ def print_and_delete(message, *path):
 
 
 def has_installed_successfully(package):
-    package_file = os.path.join(MARK_INSTALLED_DIR, package)
+    package_file = os.path.join(MARK_INSTALLED_DIR, package + '.txt')
     return os.path.exists(package_file)
 
 
 def mark_as_installed_successfully(package, output=b''):
     print(f'MARKING {package} AS SUCCESSFUL!')
     os.makedirs(MARK_INSTALLED_DIR, exist_ok=True)
-    package_file = os.path.join(MARK_INSTALLED_DIR, package)
+    package_file = os.path.join(MARK_INSTALLED_DIR, package + '.txt')
     with open(package_file, 'wb') as f:
         f.write(output)
 
@@ -46,7 +46,7 @@ def mark_as_installed_successfully(package, output=b''):
 def mark_as_failed(package, output=b''):
     print(f'MARKING {package} AS FAILED from MAIN!')
     os.makedirs(MARK_FAILED_DIR, exist_ok=True)
-    package_file = os.path.join(MARK_FAILED_DIR, package)
+    package_file = os.path.join(MARK_FAILED_DIR, package + '.txt')
     with open(package_file, 'wb') as f:
         f.write(output)
 
