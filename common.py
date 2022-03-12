@@ -70,7 +70,7 @@ def verbose_run_and_tee(cmd):
         if not output and process.poll() is not None:
             break
         if output:
-            print(output.decode('utf8', 'replace').strip())
+            print(output.decode('utf8', 'replace').strip(), flush=True)
 
     rc = process.poll()
     return rc, full_output
