@@ -7,7 +7,8 @@ import urllib.request
 
 from tqdm import tqdm
 
-from common import has_installed_successfully, mark_as_failed, verbose_run, chunks, mark_as_installed_successfully
+from common import has_installed_successfully, mark_as_failed, chunks, mark_as_installed_successfully, \
+    verbose_run_and_tee
 
 URL = 'https://hugovk.github.io/top-pypi-packages/top-pypi-packages-30-days.json'
 FILENAME = 'top-pypi-packages-30-days.json'
@@ -26,19 +27,17 @@ def try_installing(package):
     cmd = docker + [interpreter, 'test_package.py', 'install', package]
 
     try:
-        proc = verbose_run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-        output = proc.stdout
+        rc, output = verbose_run_and_tee(cmd)
+        if rc:
+            mark_as_failed(package, output)
     except KeyboardInterrupt:
         sys.exit(1)
-    except subprocess.CalledProcessError as exc:  # noqa
-        output = exc.output
-        mark_as_failed(package, output)
 
     # Re-mark as successful but this time along with the installation logs
     if has_installed_successfully(package):
         mark_as_installed_successfully(package, output)
 
-    print(output.decode('utf8', 'replace'))
+    # print(output.decode('utf8', 'replace'))
     with open(os.path.join('logs', package + '.txt'), 'wb') as f:
         f.write(output)
 

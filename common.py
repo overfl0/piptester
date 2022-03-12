@@ -56,6 +56,26 @@ def verbose_run(cmd, **kwargs):
     return subprocess.run(cmd, check=True, **kwargs)
 
 
+def verbose_run_and_tee(cmd):
+    full_output = None
+    print(' '.join(cmd), flush=True)
+    process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    while True:
+        output = process.stdout.readline()
+        if full_output:  # Yeah, yeah, performance...
+            full_output += output
+        else:
+            full_output = output
+
+        if not output and process.poll() is not None:
+            break
+        if output:
+            print(output.decode('utf8', 'replace').strip())
+
+    rc = process.poll()
+    return rc, full_output
+
+
 def chunks(lst, n):
     """Yield successive n-sized chunks from lst."""
     lst = list(lst)
