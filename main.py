@@ -27,7 +27,7 @@ def try_installing(package):
     cmd = docker + [interpreter, 'test_package.py', 'install', package]
 
     try:
-        rc, output = verbose_run_and_tee(cmd)
+        rc, output = verbose_run_and_tee(cmd, timeout=120)
         if rc:
             mark_as_failed(package, output)
     except KeyboardInterrupt:

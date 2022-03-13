@@ -1,6 +1,7 @@
 import os
 import shutil
 import subprocess
+import time
 from contextlib import contextmanager
 
 
@@ -56,9 +57,11 @@ def verbose_run(cmd, **kwargs):
     return subprocess.run(cmd, check=True, **kwargs)
 
 
-def verbose_run_and_tee(cmd):
+def verbose_run_and_tee(cmd, timeout=None):
+    start_time = time.time()
     full_output = None
     print(' '.join(cmd), flush=True)
+
     process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     while True:
         output = process.stdout.readline()
@@ -69,8 +72,14 @@ def verbose_run_and_tee(cmd):
 
         if not output and process.poll() is not None:
             break
+
         if output:
             print(output.decode('utf8', 'replace').strip(), flush=True)
+
+        if timeout and time.time() - start_time > timeout:
+            process.kill()
+            print('<killed>')
+            full_output += '<killed>' if type(full_output) is str else b'<killed>'
 
     rc = process.poll()
     return rc, full_output
