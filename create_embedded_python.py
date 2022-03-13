@@ -120,6 +120,7 @@ def prepare_distro(basedir, version, arch, install_pip=True):
                                 'python{version_with_minor}._pth'.format(version_with_minor=version_with_minor))
             with open(_pth, 'a') as f:
                 f.write('import site\n')
+            os.unlink(_pth)  # Temporary workaround for https://github.com/overfl0/piptester/issues/2
 
     else:  # Linux
         python_tar_file = tarfile.open(None, "r:bz2", BytesIO(file_raw))
