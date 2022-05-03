@@ -26,15 +26,23 @@ def try_installing(package):
     verbose_run(cmd)
 
 
+def guess_import_name(package):
+    module_name = package.replace('-', '_')
+    if module_name.endswith('_cffi'):
+        module_name = module_name[:-5]
+
+    return module_name
+
+
 def test_package(package):
     dist_path = pkg_resources.get_distribution(package).egg_info
     try:
-        module_name = open(os.path.join(dist_path, "top_level.txt")).read().strip().splitlines()[-1].replace('/', '.')
+        import_name = open(os.path.join(dist_path, "top_level.txt")).read().strip().splitlines()[-1].replace('/', '.')
     except FileNotFoundError:
-        module_name = package.replace('-', '_')
-        print('Could not find the top_level.txt file, guessing module name:', module_name)
+        import_name = guess_import_name(package)
+        print('Could not find the top_level.txt file, guessing module name:', import_name)
     print(f'Importing {package}...', flush=True)
-    importlib.import_module(module_name)
+    importlib.import_module(import_name)
     mark_as_installed_successfully(package)
 
 

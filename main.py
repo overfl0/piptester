@@ -14,7 +14,8 @@ URL = 'https://hugovk.github.io/top-pypi-packages/top-pypi-packages-30-days.json
 FILENAME = 'top-pypi-packages-30-days.json'
 ABS_FILE = os.path.join(os.path.dirname(__file__), FILENAME)
 BLACKLIST = {
-    'typing-extensions',
+    'ansible',  # Doesn't support windows
+    'ansible-core',  # Doesn't support windows
 }
 COUNT = 1000
 
