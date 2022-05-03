@@ -20,7 +20,7 @@ COUNT = 1000
 
 
 def try_installing(package):
-    interpreter = 'c:/python-37-embed-amd64/python.exe'
+    interpreter = 'c:/python-39-embed-amd64/python.exe'
     docker = ['docker', 'run', '--rm', '-w', 'c:\\data',
               '-v', f'{os.path.abspath(os.path.dirname(__file__))}:c:\\data',
               'piptester']
