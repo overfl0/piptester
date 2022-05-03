@@ -32,20 +32,22 @@ CUSTOM_PACKAGE_MAPPING = {
 
 
 def guess_import_name(package):
-    dist_path = pkg_resources.get_distribution(package).egg_info
-
     try:
         return CUSTOM_PACKAGE_MAPPING[package]
     except KeyError:
         import_name = package
 
+    dist_path = pkg_resources.get_distribution(import_name).egg_info
+
     try:
         import_name = open(os.path.join(dist_path, "top_level.txt")).read().strip().splitlines()[-1].replace('/', '.')
+        return import_name
+
     except FileNotFoundError:
         print('Could not find the top_level.txt file, guessing module name:', import_name)
 
     # Heuristics
-    module_name = package.replace('-', '_')
+    module_name = import_name.replace('-', '_')
     if module_name.endswith('_cffi'):
         module_name = module_name[:-5]
 
@@ -54,7 +56,7 @@ def guess_import_name(package):
 
 def test_package(package):
     import_name = guess_import_name(package)
-    print(f'Importing {package}...', flush=True)
+    print(f'Importing {import_name}...', flush=True)
     importlib.import_module(import_name)
     mark_as_installed_successfully(package)
 

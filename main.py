@@ -30,6 +30,7 @@ BLACKLIST = {
     'azure-mgmt-nspkg',  # Empty namespace package
     'azure-nspkg',  # Empty namespace package
     'azureml-dataprep-rslex',  # Not intended for direct installation
+    'uvloop',  # Not supported on Windows
 }
 COUNT = 1000
 
