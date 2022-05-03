@@ -13,9 +13,19 @@ from common import has_installed_successfully, mark_as_failed, chunks, mark_as_i
 URL = 'https://hugovk.github.io/top-pypi-packages/top-pypi-packages-30-days.json'
 FILENAME = 'top-pypi-packages-30-days.json'
 ABS_FILE = os.path.join(os.path.dirname(__file__), FILENAME)
+PACKAGES_MAPPING = {
+    'backports-csv': 'backports.csv',
+}
 BLACKLIST = {
     'ansible',  # Doesn't support windows
     'ansible-core',  # Doesn't support windows
+    'azure',  # Marked as deprecated
+    'azure-keyvault',  # Metapackage, just installs other packages in the top1000
+    'azure-mgmt',  # Deprecated
+    'azure-mgmt-datalake-nspkg',  # Empty namespace package
+    'azure-mgmt-nspkg',  # Empty namespace package
+    'azure-nspkg',  # Empty namespace package
+    'azureml-dataprep-rslex',  # Not intended for direct installation
 }
 COUNT = 1000
 
@@ -45,13 +55,14 @@ def try_installing(package):
 
 def main(args):
     if args.package:
-        try_installing(args.package)
+        try_installing(PACKAGES_MAPPING.get(args.package, args.package))
         return
 
     data = list(chunks(get_pypi_package_names()['rows'], 50))[args.chunk]
 
     for row in tqdm(data[:COUNT]):
         project = row['project']
+        project = PACKAGES_MAPPING.get(project, project)
         if project in BLACKLIST:
             continue
 
