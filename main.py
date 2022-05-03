@@ -43,6 +43,10 @@ def try_installing(package):
 
 
 def main(args):
+    if args.package:
+        try_installing(args.package)
+        return
+
     data = list(chunks(get_pypi_package_names()['rows'], 50))[args.chunk]
 
     for row in tqdm(data[:COUNT]):
@@ -76,7 +80,9 @@ def get_pypi_package_names():
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('chunk', type=int)
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument('--chunk', type=int)
+    group.add_argument('--package', type=str)
     args = parser.parse_args()
 
     main(args)
