@@ -27,7 +27,13 @@ def try_installing(package):
 
 
 CUSTOM_PACKAGE_MAPPING = {
-    'argon2-cffi-bindings': '_argon2_cffi_bindings'
+    'argon2-cffi-bindings': '_argon2_cffi_bindings',
+    'beautifulsoup4': 'bs4',
+    'coreschema': 'coreschema',
+    'dnspython': 'dns',
+    'jpype1': 'jpype',
+    'mlflow': 'mlflow',
+    'oldest-supported-numpy': 'numpy',
 }
 
 

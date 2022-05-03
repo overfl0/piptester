@@ -19,10 +19,13 @@ PACKAGES_MAPPING = {
     'backports-tempfile': 'backports.tempfile',
     'backports-weakref': 'backports.weakref',
     'backports-zoneinfo': 'backports.zoneinfo',
+    'jaraco-classes': 'jaraco.classes',
+    'jaraco-collections': 'jaraco.collections',
+    'jaraco-context': 'jaraco.context',
+    'jaraco-functools': 'jaraco.functools',
+    'jaraco-text': 'jaraco.text',
 }
 BLACKLIST = {
-    'ansible',  # Doesn't support windows
-    'ansible-core',  # Doesn't support windows
     'azure',  # Marked as deprecated
     'azure-keyvault',  # Metapackage, just installs other packages in the top1000
     'azure-mgmt',  # Deprecated
@@ -30,7 +33,43 @@ BLACKLIST = {
     'azure-mgmt-nspkg',  # Empty namespace package
     'azure-nspkg',  # Empty namespace package
     'azureml-dataprep-rslex',  # Not intended for direct installation
+    'bs4',  # Dummy package, use beautifulsoup4
+    'google-cloud',  # Deprecated empty package
+
+    # Not supported on Windows
+    'ansible',  # Doesn't support windows
+    'ansible-core',  # Doesn't support windows
+    'dockerpty',  # Requires fnctl
     'uvloop',  # Not supported on Windows
+
+    # Requires DLL or external setup
+    'fiona',
+    'geopandas',
+    'gitpython',
+    'graphframes',  # SPARK_HOME
+    'opencv-python',
+    'pycurl',  # libcurl
+
+    # Requires C++ compiler
+    'backports.zoneinfo',
+    'ciso8601',
+    'dbt-snowflake',
+    'netifaces',
+    'pycrypto',
+    'pygobject',
+    'pyminizip',
+    'python-levenshtein',
+    'python-keystoneclient',  # Requires netifaces
+    'sasl',
+    'snowflake-connector-python',
+    'snowflake-sqlalchemy',  # Requires snowflake-connector-python
+    'tensorflow-transform',  # Old pyarrow dependency which installs numpy
+
+    # Bug in library
+    'flask-oidc',  # https://github.com/puiterwijk/flask-oidc/pull/141
+    'jupyterlab-pygments',  # Requires pygments to be installed
+    'keras',  # Required tensorflow 2
+
 }
 COUNT = 1000
 
