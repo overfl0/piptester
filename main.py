@@ -40,7 +40,11 @@ BLACKLIST = {
     'ansible',  # Doesn't support windows
     'ansible-core',  # Doesn't support windows
     'dockerpty',  # Requires fnctl
+    'ptyprocess',  # Requires fnctl
+    'pystan',  # https://pystan2.readthedocs.io/en/latest/windows.html
+    'sekkaybot',  # Requires uvloop
     'uvloop',  # Not supported on Windows
+    'uwsgi',  # Not supported on Windows
 
     # Requires DLL or external setup
     'fiona',

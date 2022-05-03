@@ -29,10 +29,8 @@ def try_installing(package):
 CUSTOM_PACKAGE_MAPPING = {
     'argon2-cffi-bindings': '_argon2_cffi_bindings',
     'beautifulsoup4': 'bs4',
-    'coreschema': 'coreschema',
     'dnspython': 'dns',
     'jpype1': 'jpype',
-    'mlflow': 'mlflow',
     'oldest-supported-numpy': 'numpy',
 }
 
@@ -46,8 +44,18 @@ def guess_import_name(package):
     dist_path = pkg_resources.get_distribution(import_name).egg_info
 
     try:
-        import_name = open(os.path.join(dist_path, "top_level.txt")).read().strip().splitlines()[-1].replace('/', '.')
-        return import_name
+        lines = []
+        for line in open(os.path.join(dist_path, "top_level.txt")).read().strip().splitlines():
+            lines.append(line.replace('/__init__', '').replace('/', '.'))
+
+        # If we have a matching import
+        if import_name in lines:
+            return import_name
+
+        if import_name.startswith('python-') and import_name[7:] in lines:
+            return import_name[7:]
+
+        return lines[-1]
 
     except FileNotFoundError:
         print('Could not find the top_level.txt file, guessing module name:', import_name)
