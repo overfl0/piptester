@@ -15,6 +15,10 @@ FILENAME = 'top-pypi-packages-30-days.json'
 ABS_FILE = os.path.join(os.path.dirname(__file__), FILENAME)
 PACKAGES_MAPPING = {
     'backports-csv': 'backports.csv',
+    'backports-functools-lru-cache': 'backports.functools-lru-cache',
+    'backports-tempfile': 'backports.tempfile',
+    'backports-weakref': 'backports.weakref',
+    'backports-zoneinfo': 'backports.zoneinfo',
 }
 BLACKLIST = {
     'ansible',  # Doesn't support windows

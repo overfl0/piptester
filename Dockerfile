@@ -1,5 +1,19 @@
 #FROM mcr.microsoft.com/windows/servercore:ltsc2019
 ARG BASE_IMAGE=mcr.microsoft.com/windows/nanoserver:20H2
-FROM $BASE_IMAGE
+
+# Install the C++ Redistributable
+FROM mcr.microsoft.com/windows/servercore:ltsc2019 as installer
+ADD https://aka.ms/vs/17/release/vc_redist.x64.exe C:/setup/vc_redist.x64.exe
+RUN C:/setup/vc_redist.x64.exe /install /quiet /norestart
+RUN dir c:\windows\system32\*140*
+
+FROM $BASE_IMAGE as runtime
+
+# Note: this list may not be exhaustive!
+COPY --from=installer C:/Windows/System32/vcruntime140.dll C:/Windows/System32/vcruntime140.dll
+COPY --from=installer C:/Windows/System32/msvcp140.dll C:/Windows/System32/msvcp140.dll
+COPY --from=installer C:/Windows/System32/msvcp140_1.dll C:/Windows/System32/msvcp140_1.dll
 
 COPY python .
+
+RUN dir c:\windows\system32\msvcp*
