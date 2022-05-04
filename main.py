@@ -24,6 +24,10 @@ PACKAGES_MAPPING = {
     'jaraco-context': 'jaraco.context',
     'jaraco-functools': 'jaraco.functools',
     'jaraco-text': 'jaraco.text',
+    'pdfminer-six': 'pdfminer.six',
+    'randomstuff-py': 'randomstuff.py',
+    'ruamel-yaml': 'ruamel.yaml',
+    'ruamel-yaml-clib': 'ruamel.yaml.clib',
 }
 BLACKLIST = {
     'azure',  # Marked as deprecated
@@ -39,10 +43,13 @@ BLACKLIST = {
     # Not supported on Windows
     'ansible',  # Doesn't support windows
     'ansible-core',  # Doesn't support windows
+    'blessings',  # Requires curses
     'dockerpty',  # Requires fnctl
     'ptyprocess',  # Requires fnctl
     'pystan',  # https://pystan2.readthedocs.io/en/latest/windows.html
+    'python-daemon',  # Requires pwd module (also daemons are only on unix)
     'sekkaybot',  # Requires uvloop
+    'sh',  # Requires fnctl
     'uvloop',  # Not supported on Windows
     'uwsgi',  # Not supported on Windows
 
@@ -53,6 +60,14 @@ BLACKLIST = {
     'graphframes',  # SPARK_HOME
     'opencv-python',
     'pycurl',  # libcurl
+    'python-magic',  # libmagic
+
+    # Bug in library
+    'flask-oidc',  # https://github.com/puiterwijk/flask-oidc/pull/141
+    'jupyterlab-pygments',  # Requires pygments to be installed
+    'keras',  # Required tensorflow 2
+    'opensearch-py',  # Requires requests to be installed
+    'pydeequ',  # Requires pyspark
 
     # Requires C++ compiler
     'backports.zoneinfo',
@@ -69,10 +84,8 @@ BLACKLIST = {
     'snowflake-sqlalchemy',  # Requires snowflake-connector-python
     'tensorflow-transform',  # Old pyarrow dependency which installs numpy
 
-    # Bug in library
-    'flask-oidc',  # https://github.com/puiterwijk/flask-oidc/pull/141
-    'jupyterlab-pygments',  # Requires pygments to be installed
-    'keras',  # Required tensorflow 2
+    # "lolnope" doesn't work
+    'constructs',
 
 }
 COUNT = 1000

@@ -32,6 +32,7 @@ CUSTOM_PACKAGE_MAPPING = {
     'dnspython': 'dns',
     'jpype1': 'jpype',
     'oldest-supported-numpy': 'numpy',
+    'pymupdf': 'fitz',
 }
 
 
