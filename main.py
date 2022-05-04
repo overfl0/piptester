@@ -28,6 +28,10 @@ PACKAGES_MAPPING = {
     'randomstuff-py': 'randomstuff.py',
     'ruamel-yaml': 'ruamel.yaml',
     'ruamel-yaml-clib': 'ruamel.yaml.clib',
+    'zc-lockfile': 'zc.lockfile',
+    'zope-deprecation': 'zope.deprecation',
+    'zope-event': 'zope.event',
+    'zope-interface': 'zope.interface',
 }
 BLACKLIST = {
     'azure',  # Marked as deprecated
@@ -39,6 +43,7 @@ BLACKLIST = {
     'azureml-dataprep-rslex',  # Not intended for direct installation
     'bs4',  # Dummy package, use beautifulsoup4
     'google-cloud',  # Deprecated empty package
+    'sklearn',  # "Use scikit-learn instead"
 
     # Not supported on Windows
     'ansible',  # Doesn't support windows
@@ -61,13 +66,22 @@ BLACKLIST = {
     'opencv-python',
     'pycurl',  # libcurl
     'python-magic',  # libmagic
+    'xgboost',  # xgboost.dll
 
-    # Bug in library
+    # Bug in library / requirement unsatisfied
     'flask-oidc',  # https://github.com/puiterwijk/flask-oidc/pull/141
     'jupyterlab-pygments',  # Requires pygments to be installed
     'keras',  # Required tensorflow 2
     'opensearch-py',  # Requires requests to be installed
     'pydeequ',  # Requires pyspark
+    'ruamel.yaml.clib',  # Probably requires ruamel.yaml
+    'soupsieve',  # Requires beautifulsoup4
+    'spark-sklearn',  # Old lib with old dependencies on scikit-learn
+    'tensorflow-addons',  # Requires tensorflow
+    'tensorflow-estimator',  # Requires six
+    'tensorflow-hub',  # Requires tensorflow
+    'tensorflow-io-gcs-filesystem',  # Requires tensorflow
+    'tf-estimator-nightly',  # Requires six
 
     # Requires C++ compiler
     'backports.zoneinfo',
@@ -86,6 +100,7 @@ BLACKLIST = {
 
     # "lolnope" doesn't work
     'constructs',
+    'tfx-bsl',  # Wheels only 3.6-3.8 (win/lin)
 
 }
 COUNT = 1000

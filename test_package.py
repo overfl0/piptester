@@ -33,6 +33,8 @@ CUSTOM_PACKAGE_MAPPING = {
     'jpype1': 'jpype',
     'oldest-supported-numpy': 'numpy',
     'pymupdf': 'fitz',
+    'poetry-core': 'poetry.core',
+    'ruamel.yaml.clib': '_ruamel_yaml',
 }
 
 
