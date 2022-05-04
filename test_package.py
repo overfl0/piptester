@@ -12,20 +12,6 @@ sys.path.append(os.path.dirname(__file__))
 from common import has_installed_successfully, mark_as_installed_successfully, verbose_run
 
 
-def try_installing(package):
-    if has_installed_successfully(package):
-        print(f'Package {package} was previously installed successfully, skipping...', flush=True)
-        return
-
-    print(f'Installing {package}...')
-    pip_args = ['--no-warn-script-location', '--disable-pip-version-check', '--cache-dir', 'cache']
-    cmd = [sys.executable, '-I', '-E', '-s', '-m', 'pip', 'install'] + pip_args + [package]
-    verbose_run(cmd)
-
-    cmd = [sys.executable, '-I', '-E', '-s', 'test_package.py', 'test', package]
-    verbose_run(cmd)
-
-
 CUSTOM_PACKAGE_MAPPING = {
     'argon2-cffi-bindings': '_argon2_cffi_bindings',
     'beautifulsoup4': 'bs4',
@@ -36,6 +22,42 @@ CUSTOM_PACKAGE_MAPPING = {
     'poetry-core': 'poetry.core',
     'ruamel.yaml.clib': '_ruamel_yaml',
 }
+
+
+# Packages which are needed, but are missing, for some reason
+CUSTOM_PACKAGE_REQUIREMENTS = {
+    'opensearch-py': ['requests'],
+    'jupyterlab-pygments': ['pygments'],
+    'keras': ['tensorflow'],
+    'pydeequ': ['pyspark'],  # TODO: Spark version
+    'ruamel.yaml.clib': ['ruamel.yaml'],
+    'soupsieve': ['beautifulsoup4'],
+    'tensorflow-addons': ['tensorflow'],
+    'tensorflow-estimator': ['six', 'tensorflow'],
+    'tensorflow-hub': ['tensorflow'],
+    'tensorflow-io-gcs-filesystem': ['tensorflow'],
+    'tf-estimator-nightly': ['six', 'tensorflow'],
+}
+
+
+def try_installing(package):
+    if has_installed_successfully(package):
+        print(f'Package {package} was previously installed successfully, skipping...', flush=True)
+        return
+
+    pip_args = ['--no-warn-script-location', '--disable-pip-version-check', '--cache-dir', 'cache']
+
+    if package in CUSTOM_PACKAGE_REQUIREMENTS:
+        print(f'Installing implicit {package} requirements...')
+        cmd = [sys.executable, '-I', '-E', '-s', '-m', 'pip', 'install'] + pip_args + CUSTOM_PACKAGE_REQUIREMENTS[package]
+        verbose_run(cmd)
+
+    print(f'Installing {package}...')
+    cmd = [sys.executable, '-I', '-E', '-s', '-m', 'pip', 'install'] + pip_args + [package]
+    verbose_run(cmd)
+
+    cmd = [sys.executable, '-I', '-E', '-s', 'test_package.py', 'test', package]
+    verbose_run(cmd)
 
 
 def guess_import_name(package):

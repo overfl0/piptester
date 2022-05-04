@@ -70,18 +70,7 @@ BLACKLIST = {
 
     # Bug in library / requirement unsatisfied
     'flask-oidc',  # https://github.com/puiterwijk/flask-oidc/pull/141
-    'jupyterlab-pygments',  # Requires pygments to be installed
-    'keras',  # Required tensorflow 2
-    'opensearch-py',  # Requires requests to be installed
-    'pydeequ',  # Requires pyspark
-    'ruamel.yaml.clib',  # Probably requires ruamel.yaml
-    'soupsieve',  # Requires beautifulsoup4
     'spark-sklearn',  # Old lib with old dependencies on scikit-learn
-    'tensorflow-addons',  # Requires tensorflow
-    'tensorflow-estimator',  # Requires six
-    'tensorflow-hub',  # Requires tensorflow
-    'tensorflow-io-gcs-filesystem',  # Requires tensorflow
-    'tf-estimator-nightly',  # Requires six
 
     # Requires C++ compiler
     'backports.zoneinfo',

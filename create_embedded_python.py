@@ -111,7 +111,7 @@ def prepare_distro(basedir, version, arch, install_pip=True):
         os.makedirs(stdlib_path)
         stdlib_zip_file.extractall(stdlib_path)
 
-        # # Python 3.6 and above
+        # Python 3.6 and above
         if int(version_with_minor[1:]) >= 6:
             # import site when executing python.exe (doesn't apply to the embedded
             # version) which gives access to site-packages and that allows pip (and
