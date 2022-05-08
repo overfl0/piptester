@@ -14,6 +14,6 @@ COPY --from=installer C:/Windows/System32/vcruntime140.dll C:/Windows/System32/v
 COPY --from=installer C:/Windows/System32/msvcp140.dll C:/Windows/System32/msvcp140.dll
 COPY --from=installer C:/Windows/System32/msvcp140_1.dll C:/Windows/System32/msvcp140_1.dll
 
-COPY python .
+COPY python/python-39-embed-amd64 python/python-39-embed-amd64
 
 RUN dir c:\windows\system32\msvcp*

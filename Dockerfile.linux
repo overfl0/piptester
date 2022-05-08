@@ -1,0 +1,3 @@
+FROM ubuntu
+
+COPY python/python-39-embed-linux64 python/python-39-embed-linux64

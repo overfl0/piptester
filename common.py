@@ -1,12 +1,14 @@
 import os
 import shutil
+import stat
 import subprocess
+import sys
 import time
 from contextlib import contextmanager
 
-
-MARK_INSTALLED_DIR = os.path.join('logs', 'installed')
-MARK_FAILED_DIR = os.path.join('logs', 'failed')
+LOGS_DIR = os.path.join('logs', 'linux' if sys.platform == 'linux' else 'windows')
+MARK_INSTALLED_DIR = os.path.join(LOGS_DIR, 'installed')
+MARK_FAILED_DIR = os.path.join(LOGS_DIR, 'failed')
 
 
 @contextmanager
@@ -39,9 +41,16 @@ def has_installed_successfully(package):
 def mark_as_installed_successfully(package, output=b''):
     print(f'MARKING {package} AS SUCCESSFUL!')
     os.makedirs(MARK_INSTALLED_DIR, exist_ok=True)
+    if os.path.exists(MARK_INSTALLED_DIR):
+        print('Directory created successfully', flush=True)
+        os.system(f'ls -lad {MARK_INSTALLED_DIR}')
+        os.system('id')
     package_file = os.path.join(MARK_INSTALLED_DIR, package + '.txt')
     with open(package_file, 'wb') as f:
         f.write(output)
+
+    if sys.platform == 'linux' and not os.stat(package_file).st_mode & stat.S_IWOTH:
+        os.chmod(package_file, 0o777)
 
 
 def mark_as_failed(package, output=b''):
@@ -50,6 +59,9 @@ def mark_as_failed(package, output=b''):
     package_file = os.path.join(MARK_FAILED_DIR, package + '.txt')
     with open(package_file, 'wb') as f:
         f.write(output)
+
+    if sys.platform == 'linux' and not os.stat(package_file).st_mode & stat.S_IWOTH:
+        os.chmod(package_file, 0o777)
 
 
 def verbose_run(cmd, **kwargs):

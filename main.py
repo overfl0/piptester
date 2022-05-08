@@ -1,14 +1,13 @@
 import argparse
 import json
 import os
-import subprocess
 import sys
 import urllib.request
 
 from tqdm import tqdm
 
 from common import has_installed_successfully, mark_as_failed, chunks, mark_as_installed_successfully, \
-    verbose_run_and_tee
+    verbose_run_and_tee, LOGS_DIR
 
 URL = 'https://hugovk.github.io/top-pypi-packages/top-pypi-packages-30-days.json'
 FILENAME = 'top-pypi-packages-30-days.json'
@@ -95,11 +94,18 @@ BLACKLIST = {
 COUNT = 1000
 
 
-def try_installing(package):
-    interpreter = 'c:/python-39-embed-amd64/python.exe'
-    docker = ['docker', 'run', '--rm', '-w', 'c:\\data',
-              '-v', f'{os.path.abspath(os.path.dirname(__file__))}:c:\\data',
-              'piptester']
+def try_installing(package, linux=False):
+    if linux:
+        interpreter = '/python/python-39-embed-linux64/bin/python3'
+        docker = ['docker', 'run', '--rm', '-w', '/data',
+                  '-v', f'{os.path.abspath(os.path.dirname(__file__))}:/data',
+                  'piptester']
+    else:
+        interpreter = 'c:/python-39-embed-amd64/python.exe'
+        docker = ['docker', 'run', '--rm', '-w', 'c:\\data',
+                  '-v', f'{os.path.abspath(os.path.dirname(__file__))}:c:\\data',
+                  'piptester']
+
     cmd = docker + [interpreter, 'test_package.py', 'install', package]
 
     try:
@@ -114,13 +120,13 @@ def try_installing(package):
         mark_as_installed_successfully(package, output)
 
     # print(output.decode('utf8', 'replace'))
-    with open(os.path.join('logs', package + '.txt'), 'wb') as f:
+    with open(os.path.join(LOGS_DIR, package + '.txt'), 'wb') as f:
         f.write(output)
 
 
 def main(args):
     if args.package:
-        try_installing(PACKAGES_MAPPING.get(args.package, args.package))
+        try_installing(PACKAGES_MAPPING.get(args.package, args.package), linux=args.linux)
         return
 
     data = list(chunks(get_pypi_package_names()['rows'], 50))[args.chunk]
@@ -138,7 +144,7 @@ def main(args):
         print('\r' + '#' * 80)
         print(project)
 
-        try_installing(project)
+        try_installing(project, linux=args.linux)
 
 
 def get_pypi_package_names():
@@ -157,6 +163,7 @@ def get_pypi_package_names():
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
+    parser.add_argument('--linux', action='store_true', default=sys.platform == 'linux')
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument('--chunk', type=int)
     group.add_argument('--package', type=str)
