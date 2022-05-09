@@ -43,8 +43,7 @@ def mark_as_installed_successfully(package, output=b''):
     os.makedirs(MARK_INSTALLED_DIR, exist_ok=True)
     if os.path.exists(MARK_INSTALLED_DIR):
         print('Directory created successfully', flush=True)
-        os.system(f'ls -lad {MARK_INSTALLED_DIR}')
-        os.system('id')
+
     package_file = os.path.join(MARK_INSTALLED_DIR, package + '.txt')
     with open(package_file, 'wb') as f:
         f.write(output)
