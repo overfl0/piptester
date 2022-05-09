@@ -19,6 +19,10 @@ def try_installing(package):
 
     pip_args = ['--no-warn-script-location', '--disable-pip-version-check', '--cache-dir', 'cache']
 
+    os.system('id')
+    os.system('ls -l cache')
+    os.system('ls -ld cache')
+
     if package in CUSTOM_PACKAGE_REQUIREMENTS:
         print(f'Installing implicit {package} requirements...')
         cmd = [sys.executable, '-I', '-E', '-s', '-m', 'pip', 'install'] + pip_args + CUSTOM_PACKAGE_REQUIREMENTS[package]
