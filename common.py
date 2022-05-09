@@ -6,7 +6,8 @@ import sys
 import time
 from contextlib import contextmanager
 
-LOGS_DIR = os.path.join('logs', 'linux' if sys.platform == 'linux' else 'windows')
+CURRENT_OS = 'linux' if sys.platform == 'linux' else 'windows'
+LOGS_DIR = os.path.join('logs', CURRENT_OS)
 MARK_INSTALLED_DIR = os.path.join(LOGS_DIR, 'installed')
 MARK_FAILED_DIR = os.path.join(LOGS_DIR, 'failed')
 

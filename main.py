@@ -8,7 +8,7 @@ from tqdm import tqdm
 
 from blacklist import BLACKLIST
 from common import has_installed_successfully, mark_as_failed, chunks, mark_as_installed_successfully, \
-    verbose_run_and_tee, LOGS_DIR
+    verbose_run_and_tee, LOGS_DIR, CURRENT_OS
 from workarounds import PACKAGES_REAL_NAME
 
 URL = 'https://hugovk.github.io/top-pypi-packages/top-pypi-packages-30-days.json'
@@ -57,7 +57,7 @@ def main(args):
     for row in tqdm(data[:COUNT]):
         project = row['project']
         project = PACKAGES_REAL_NAME.get(project, project)
-        if project in BLACKLIST:
+        if project in BLACKLIST[CURRENT_OS]:
             continue
 
         if has_installed_successfully(project):
