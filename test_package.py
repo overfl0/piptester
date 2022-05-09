@@ -5,39 +5,12 @@ import sys
 
 import pkg_resources
 
+from workarounds import CUSTOM_PACKAGE_REQUIREMENTS, PACKAGE_IMPORT_NAME
 
 sys.path.append(os.path.dirname(__file__))
 
 
 from common import has_installed_successfully, mark_as_installed_successfully, verbose_run
-
-
-CUSTOM_PACKAGE_MAPPING = {
-    'argon2-cffi-bindings': '_argon2_cffi_bindings',
-    'beautifulsoup4': 'bs4',
-    'dnspython': 'dns',
-    'jpype1': 'jpype',
-    'oldest-supported-numpy': 'numpy',
-    'pymupdf': 'fitz',
-    'poetry-core': 'poetry.core',
-    'ruamel.yaml.clib': '_ruamel_yaml',
-}
-
-
-# Packages which are needed, but are missing, for some reason
-CUSTOM_PACKAGE_REQUIREMENTS = {
-    'opensearch-py': ['requests'],
-    'jupyterlab-pygments': ['pygments'],
-    'keras': ['tensorflow'],
-    'pydeequ': ['pyspark'],  # TODO: Spark version
-    'ruamel.yaml.clib': ['ruamel.yaml'],
-    'soupsieve': ['beautifulsoup4'],
-    'tensorflow-addons': ['tensorflow'],
-    'tensorflow-estimator': ['six', 'tensorflow'],
-    'tensorflow-hub': ['tensorflow'],
-    'tensorflow-io-gcs-filesystem': ['tensorflow'],
-    'tf-estimator-nightly': ['six', 'tensorflow'],
-}
 
 
 def try_installing(package):
@@ -62,13 +35,16 @@ def try_installing(package):
 
 def guess_import_name(package):
     try:
-        return CUSTOM_PACKAGE_MAPPING[package]
+        return PACKAGE_IMPORT_NAME[package]
     except KeyError:
         import_name = package
 
     dist_path = pkg_resources.get_distribution(import_name).egg_info
 
     try:
+        # print('###')
+        # print(open(os.path.join(dist_path, "top_level.txt")).read())
+        # print('$$$')
         lines = []
         for line in open(os.path.join(dist_path, "top_level.txt")).read().strip().splitlines():
             lines.append(line.replace('/__init__', '').replace('/', '.'))
