@@ -5,18 +5,17 @@ import sys
 
 import pkg_resources
 
-from workarounds import CUSTOM_PACKAGE_REQUIREMENTS, PACKAGE_IMPORT_NAME
-
 sys.path.append(os.path.dirname(__file__))
 
 
-from common import has_installed_successfully, mark_as_installed_successfully, verbose_run
+from workarounds import CUSTOM_PACKAGE_REQUIREMENTS, PACKAGE_IMPORT_NAME
+from common import mark_as_installed_successfully, verbose_run
 
 
 def try_installing(package):
-    if has_installed_successfully(package):
-        print(f'Package {package} was previously installed successfully, skipping...', flush=True)
-        return
+    # if has_installed_successfully(package):
+    #     print(f'Package {package} was previously installed successfully, skipping...', flush=True)
+    #     return
 
     pip_args = ['--no-warn-script-location', '--disable-pip-version-check', '--cache-dir', 'cache']
 
