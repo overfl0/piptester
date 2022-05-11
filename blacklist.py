@@ -68,5 +68,41 @@ BLACKLIST = {
         'bs4',  # Dummy package, use beautifulsoup4
         'google-cloud',  # Deprecated empty package
         'sklearn',  # "Use scikit-learn instead"
+
+        # Not supported on Linux
+        'pywin32',
+
+        # Requires DLL or external setup
+        'fiona',
+        'gitpython',
+        'graphframes',  # SPARK_HOME
+        'lightgbm',  # libgomp.so.1
+        'mysqlclient',  # mysql_config not found
+        'opencv-python',  # libGL.so.1
+        'pattern',  # Requires mysqlclient
+        'psycopg2',  # pg_config
+        'pycairo',  # pkg-config
+        'pycurl',  # curl-config
+        'pygobject',  # Requires pycairo
+        'python-magic',  # libmagic
+
+        # Bug in library / requirement unsatisfied
+        'flask-oidc',  # https://github.com/puiterwijk/flask-oidc/pull/141
+        'spark-sklearn',  # Old lib with old dependencies on scikit-learn
+
+        # Requires C++ compiler
+        'backports.zoneinfo',
+        'ciso8601',
+        'pycrypto',
+        'pyminizip',
+        'pyodbc',
+        'python-levenshtein',
+        'sasl',
+        'tensorflow-transform',  # Old pyarrow dependency which installs numpy
+        'uwsgi',
+
+        # "lolnope" doesn't work
+        'constructs',
+        'tfx-bsl',  # Wheels only 3.6-3.8 (win/lin)
     }
 }
