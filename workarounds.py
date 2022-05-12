@@ -40,6 +40,7 @@ CUSTOM_PACKAGE_REQUIREMENTS = {
     'jupyterlab-pygments': ['pygments'],
     'keras': ['tensorflow'],
     'pydeequ': ['pyspark'],  # TODO: Spark version
+    'graphframes': ['pyspark'],
     'ruamel.yaml.clib': ['ruamel.yaml'],
     'soupsieve': ['beautifulsoup4'],
     'tensorflow-addons': ['tensorflow'],

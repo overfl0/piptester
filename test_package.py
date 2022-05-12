@@ -9,13 +9,23 @@ sys.path.append(os.path.dirname(__file__))
 
 
 from workarounds import CUSTOM_PACKAGE_REQUIREMENTS, PACKAGE_IMPORT_NAME
-from common import mark_as_installed_successfully, verbose_run
+from common import mark_as_installed_successfully, verbose_run, CURRENT_OS
 
 
 def try_installing(package):
     # if has_installed_successfully(package):
     #     print(f'Package {package} was previously installed successfully, skipping...', flush=True)
     #     return
+
+    try:
+        installation = importlib.import_module(f'installation.{package}')
+        installation_helper = getattr(installation, CURRENT_OS)
+    except ModuleNotFoundError:
+        pass
+    except AttributeError:
+        pass
+    else:
+        installation_helper()
 
     pip_args = ['--no-warn-script-location', '--disable-pip-version-check', '--cache-dir', 'cache']
 
