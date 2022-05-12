@@ -19,15 +19,12 @@ COUNT = 1000
 
 def try_installing(package, linux=False):
     if linux:
-        directory = list(filter(lambda x: x.endswith('-embed-linux64'), os.listdir('python')))[0]
-        interpreter = f'python/{directory}/bin/python3'
-        print(interpreter)
+        interpreter = '/python/bin/python3'
         docker = ['docker', 'run', '--rm', '-w', '/data',
                   '-v', f'{os.path.abspath(os.path.dirname(__file__))}:/data',
                   'piptester']
     else:
-        directory = list(filter(lambda x: x.endswith('-embed-amd64'), os.listdir('python')))[0]
-        interpreter = f'python/{directory}/python.exe'
+        interpreter = f'c:/python/python.exe'
         docker = ['docker', 'run', '--rm', '-w', 'c:\\data',
                   '-v', f'{os.path.abspath(os.path.dirname(__file__))}:c:\\data',
                   'piptester']
