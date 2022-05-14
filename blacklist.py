@@ -10,6 +10,7 @@ BLACKLIST = {
         'bs4',  # Dummy package, use beautifulsoup4
         'google-cloud',  # Deprecated empty package
         'sklearn',  # "Use scikit-learn instead"
+        'tensorflow-io-gcs-filesystem.txt',  # I THINK that this is not supposed to be used directly
 
         # Not supported on Windows
         'ansible',  # Doesn't support windows
@@ -68,6 +69,7 @@ BLACKLIST = {
         'bs4',  # Dummy package, use beautifulsoup4
         'google-cloud',  # Deprecated empty package
         'sklearn',  # "Use scikit-learn instead"
+        'tensorflow-io-gcs-filesystem.txt',  # I THINK that this is not supposed to be used directly
 
         # Not supported on Linux
         'pywin32',
@@ -78,7 +80,7 @@ BLACKLIST = {
         #'graphframes',  # SPARK_HOME
         #'lightgbm',  # libgomp.so.1
         #'mysqlclient',  # mysql_config not found
-        'opencv-python',  # libGL.so.1
+        #'opencv-python',  # libGL.so.1
         #'pattern',  # Requires mysqlclient
         #'psycopg2',  # pg_config
         #'pycairo',  # pkg-config
@@ -89,6 +91,7 @@ BLACKLIST = {
         # Bug in library / requirement unsatisfied
         'flask-oidc',  # https://github.com/puiterwijk/flask-oidc/pull/141
         'spark-sklearn',  # Old lib with old dependencies on scikit-learn
+        'imbalanced-learn',  # imports _joblib_parallel_args from the wrong place
 
         # Requires C++ compiler
         #'backports.zoneinfo',
@@ -103,7 +106,6 @@ BLACKLIST = {
 
         # "lolnope" doesn't work
         'constructs',
-        'imbalanced-learn',  # imports _joblib_parallel_args from the wrong place
         'sekkaybot',  # Some kind of personal bot or sth...
         'tfx-bsl',  # Wheels only 3.6-3.8 (win/lin)
     }
