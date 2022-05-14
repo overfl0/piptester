@@ -31,6 +31,7 @@ PACKAGE_IMPORT_NAME = {
     'oldest-supported-numpy': 'numpy',
     'pymupdf': 'fitz',
     'poetry-core': 'poetry.core',
+    'pystan': 'stan',
     'ruamel.yaml.clib': '_ruamel_yaml',
 }
 

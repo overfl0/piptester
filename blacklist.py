@@ -103,6 +103,7 @@ BLACKLIST = {
 
         # "lolnope" doesn't work
         'constructs',
+        'sekkaybot',  # Some kind of personal bot or sth...
         'tfx-bsl',  # Wheels only 3.6-3.8 (win/lin)
     }
 }
