@@ -42,6 +42,7 @@ CUSTOM_PACKAGE_REQUIREMENTS = {
     'keras': ['tensorflow'],
     'pydeequ': ['pyspark'],  # TODO: Spark version
     'graphframes': ['pyspark'],
+    'imbalanced-learn': ['sklearn'],
     'ruamel.yaml.clib': ['ruamel.yaml'],
     'soupsieve': ['beautifulsoup4'],
     'tensorflow-addons': ['tensorflow'],

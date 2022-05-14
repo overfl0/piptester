@@ -17,7 +17,7 @@ def apt_update(force=False):
 
 def apt_install(*packages):
     apt_update()
-    cmd = 'apt install -y ' + ' '.join(packages)
+    cmd = 'DEBIAN_FRONTEND=noninteractive apt install -q -y ' + ' '.join(packages)
     print(cmd, flush=True)
     os.system(cmd)
 
