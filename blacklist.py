@@ -103,6 +103,7 @@ BLACKLIST = {
 
         # "lolnope" doesn't work
         'constructs',
+        'imbalanced-learn',  # imports _joblib_parallel_args from the wrong place
         'sekkaybot',  # Some kind of personal bot or sth...
         'tfx-bsl',  # Wheels only 3.6-3.8 (win/lin)
     }
