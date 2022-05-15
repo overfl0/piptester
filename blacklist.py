@@ -26,32 +26,33 @@ BLACKLIST = {
         'uwsgi',  # Not supported on Windows
 
         # Requires DLL or external setup
-        'fiona',
-        'geopandas',
-        'gitpython',
-        'graphframes',  # SPARK_HOME
-        'opencv-python',
-        'pycurl',  # libcurl
-        'python-magic',  # libmagic
-        'xgboost',  # xgboost.dll
+        # 'fiona',
+        # 'geopandas',
+        # 'gitpython',
+        # 'graphframes',  # SPARK_HOME
+        # 'opencv-python',
+        # 'pycurl',  # libcurl
+        # 'python-magic',  # libmagic
+        # 'xgboost',  # xgboost.dll
 
         # Bug in library / requirement unsatisfied
         'flask-oidc',  # https://github.com/puiterwijk/flask-oidc/pull/141
         'spark-sklearn',  # Old lib with old dependencies on scikit-learn
+        'imbalanced-learn',  # imports _joblib_parallel_args from the wrong place
 
         # Requires C++ compiler
-        'backports.zoneinfo',
-        'ciso8601',
-        'dbt-snowflake',
-        'netifaces',
-        'pycrypto',
-        'pygobject',
-        'pyminizip',
-        'python-levenshtein',
-        'python-keystoneclient',  # Requires netifaces
-        'sasl',
-        'snowflake-connector-python',
-        'snowflake-sqlalchemy',  # Requires snowflake-connector-python
+        # 'backports.zoneinfo',
+        # 'ciso8601',
+        # 'dbt-snowflake',
+        # 'netifaces',
+        # 'pycrypto',
+        # 'pygobject',
+        # 'pyminizip',
+        # 'python-levenshtein',
+        # 'python-keystoneclient',  # Requires netifaces
+        # 'sasl',
+        # 'snowflake-connector-python',
+        # 'snowflake-sqlalchemy',  # Requires snowflake-connector-python
         'tensorflow-transform',  # Old pyarrow dependency which installs numpy
 
         # "lolnope" doesn't work
