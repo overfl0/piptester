@@ -87,4 +87,4 @@ jobs:
           path: |
             logs
           if-no-files-found: error
-          retention-days: 1
+          retention-days: 30
