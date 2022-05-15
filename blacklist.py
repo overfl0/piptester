@@ -10,7 +10,7 @@ BLACKLIST = {
         'bs4',  # Dummy package, use beautifulsoup4
         'google-cloud',  # Deprecated empty package
         'sklearn',  # "Use scikit-learn instead"
-        'tensorflow-io-gcs-filesystem.txt',  # I THINK that this is not supposed to be used directly
+        'tensorflow-io-gcs-filesystem',  # I THINK that this is not supposed to be used directly
 
         # Not supported on Windows
         'ansible',  # Doesn't support windows
@@ -45,12 +45,12 @@ BLACKLIST = {
         # 'ciso8601',
         # 'dbt-snowflake',
         # 'netifaces',
-        # 'pycrypto',
-        # 'pygobject',
+        # 'pycrypto', #!
+        # 'pygobject', #!
         # 'pyminizip',
         # 'python-levenshtein',
         # 'python-keystoneclient',  # Requires netifaces
-        # 'sasl',
+        # 'sasl', #!
         # 'snowflake-connector-python',
         # 'snowflake-sqlalchemy',  # Requires snowflake-connector-python
         'tensorflow-transform',  # Old pyarrow dependency which installs numpy
@@ -70,7 +70,7 @@ BLACKLIST = {
         'bs4',  # Dummy package, use beautifulsoup4
         'google-cloud',  # Deprecated empty package
         'sklearn',  # "Use scikit-learn instead"
-        'tensorflow-io-gcs-filesystem.txt',  # I THINK that this is not supposed to be used directly
+        'tensorflow-io-gcs-filesystem',  # I THINK that this is not supposed to be used directly
 
         # Not supported on Linux
         'pywin32',
