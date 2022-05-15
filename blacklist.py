@@ -26,27 +26,27 @@ BLACKLIST = {
         'uwsgi',  # Not supported on Windows
 
         # Requires DLL or external setup
-        # 'fiona',
-        # 'geopandas',
+        'fiona',
+        'geopandas',  # Requires fiona
         # 'gitpython',
         # 'graphframes',  # SPARK_HOME
         # 'opencv-python',
         # 'pycurl',  # libcurl
-        # 'python-magic',  # libmagic
+        # 'pygobject',  # Msvc not supported https://gitlab.gnome.org/GNOME/pygobject/-/issues/454
         # 'xgboost',  # xgboost.dll
 
         # Bug in library / requirement unsatisfied
         'flask-oidc',  # https://github.com/puiterwijk/flask-oidc/pull/141
         'spark-sklearn',  # Old lib with old dependencies on scikit-learn
         'imbalanced-learn',  # imports _joblib_parallel_args from the wrong place
+        'python-magic',  # wrong dependency on python 3.8+ https://github.com/dveselov/python-libmagic/issues/8#issuecomment-1040880668
+        'pycrypto',  # "PyCrypto is dead" https://github.com/pycrypto/pycrypto/issues/238
 
         # Requires C++ compiler
         # 'backports.zoneinfo',
         # 'ciso8601',
         # 'dbt-snowflake',
         # 'netifaces',
-        # 'pycrypto', #!
-        # 'pygobject', #!
         # 'pyminizip',
         # 'python-levenshtein',
         # 'python-keystoneclient',  # Requires netifaces
