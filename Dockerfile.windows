@@ -1,23 +1,22 @@
 #docker build -f Dockerfile.windows -t piptester -m 4GB .
 #FROM mcr.microsoft.com/windows/servercore:ltsc2019
-ARG BASE_IMAGE=mcr.microsoft.com/windows/nanoserver:20H2
+#ARG BASE_IMAGE=mcr.microsoft.com/windows/nanoserver:20H2
+ARG BASE_IMAGE=mcr.microsoft.com/windows/servercore:ltsc2019
+FROM $BASE_IMAGE
 
 # Install the C++ Redistributable
-FROM mcr.microsoft.com/windows/servercore:ltsc2019 as installer
+#FROM mcr.microsoft.com/windows/servercore:ltsc2019 as installer
 ADD https://aka.ms/vs/17/release/vc_redist.x64.exe C:/setup/vc_redist.x64.exe
 RUN C:/setup/vc_redist.x64.exe /install /quiet /norestart
 RUN dir c:\windows\system32\*140*
-
-FROM $BASE_IMAGE as runtime
+#
+#FROM $BASE_IMAGE as runtime
+# Note: this list may not be exhaustive!
+#COPY --from=installer C:/Windows/System32/vcruntime140.dll C:/Windows/System32/vcruntime140.dll
+#COPY --from=installer C:/Windows/System32/msvcp140.dll C:/Windows/System32/msvcp140.dll
+#COPY --from=installer C:/Windows/System32/msvcp140_1.dll C:/Windows/System32/msvcp140_1.dll
 
 COPY python/python-39-embed-amd64 python
-
-# Note: this list may not be exhaustive!
-COPY --from=installer C:/Windows/System32/vcruntime140.dll C:/Windows/System32/vcruntime140.dll
-COPY --from=installer C:/Windows/System32/msvcp140.dll C:/Windows/System32/msvcp140.dll
-COPY --from=installer C:/Windows/System32/msvcp140_1.dll C:/Windows/System32/msvcp140_1.dll
-
-RUN dir c:\windows\system32\msvcp*
 
 # Install build tools
 # https://docs.microsoft.com/en-us/visualstudio/install/advanced-build-tools-container?view=vs-2019
@@ -27,6 +26,9 @@ RUN curl -SL --output vs_buildtools.exe https://aka.ms/vs/16/release/vs_buildtoo
 # Install Build Tools with the Microsoft.VisualStudio.Workload.AzureBuildTools workload, excluding workloads and components with known issues.
 RUN (start /w vs_buildtools.exe --quiet --wait --norestart --nocache\
         --installPath "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\BuildTools"\
+        --add Microsoft.VisualStudio.Component.VC.140\
+        --add Microsoft.VisualStudio.Workload.VCTools\
+        --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64\
         --add Microsoft.VisualStudio.Component.Windows10SDK.19041\
         --remove Microsoft.VisualStudio.Component.Windows10SDK.10240\
         --remove Microsoft.VisualStudio.Component.Windows10SDK.10586\
