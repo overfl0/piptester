@@ -24,3 +24,19 @@ def apt_install(*packages):
 
 def install_clang():
     apt_install('clang')
+
+
+def windows_refresh_path():
+    import winreg
+
+    def get_sys_env(name):
+        key = winreg.CreateKey(winreg.HKEY_LOCAL_MACHINE,
+                               r"System\CurrentControlSet\Control\Session Manager\Environment")
+        return winreg.QueryValueEx(key, name)[0]
+
+    def get_user_env(name):
+        key = winreg.CreateKey(winreg.HKEY_CURRENT_USER, r"Environment")
+        return winreg.QueryValueEx(key, name)[0]
+
+    new_path = os.path.expandvars(get_sys_env('path') + ';' + get_user_env('path'))
+    os.environ['PATH'] = new_path
