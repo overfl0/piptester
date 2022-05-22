@@ -7,7 +7,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-2019, ubuntu-20.04]
+        os: [windows-2022, ubuntu-20.04]
 
     steps:
       - uses: actions/setup-python@v2
@@ -39,13 +39,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-2019]
-#        os: [windows-2019, ubuntu-20.04]
+        os: [windows-2022]
+#        os: [windows-2022, ubuntu-20.04]
 #        os: [ubuntu-20.04]
         chunks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
         include:
-          - os: windows-2019
-            docker: docker build -f Dockerfile.windows -t piptester -m 4GB --build-arg BASE_IMAGE=mcr.microsoft.com/windows/servercore:ltsc2019 .
+          - os: windows-2022
+            docker: docker build -f Dockerfile.windows -t piptester -m 4GB --build-arg BASE_IMAGE=mcr.microsoft.com/windows:20H2 .
 #          - os: ubuntu-20.04
 #            docker: docker build -f Dockerfile.linux -t piptester .
 
@@ -72,8 +72,15 @@ jobs:
         run: tar xf ../python-${{ env.PYTHON_VERSION }}-${{ runner.os }}.tar
         working-directory: python
 
-      - name: Install rependencies
+      - name: Install dependencies
         run: python -m pip install -r requirements.txt
+
+#      - name: Fetch windows dlls from host
+#        run: tar -cvf dlls.tar c:/windows/system32/MFPlat.DLL c:/windows/system32/MF.dll c:/windows/system32/MFReadWrite.dll c:/windows/system32/RMCLIENT.dll c:/windows/system32/dsreg.dll c:/windows/system32/dsclient.dll c:/windows/system32/efswrt.dll c:/windows/system32/edputil.dll c:/windows/system32/SystemEventsBrokerClient.dll c:/windows/system32/CLDAPI.dll c:/windows/system32/cryptngc.dll c:/windows/system32/dcomp.dll c:/windows/system32/CoreUIComponents.dll c:/windows/system32/ContactActivation.dll c:/windows/system32/AppxApplicabilityEngine.dll c:/windows/system32/TextInputFramework.dll c:/windows/system32/edpauditapi.dll c:/windows/system32/FVEAPI.dll c:/windows/system32/MFTranscode.dll c:/windows/system32/MFCORE.dll c:/windows/system32/windows.globalization.fontgroups.dll c:/windows/system32/DEVMGR.DLL c:/windows/system32/SHDOCVW.dll c:/windows/system32/EFSADU.dll c:/windows/system32/elscore.dll c:/windows/system32/D3DSCache.dll c:/windows/system32/policymanager.dll c:/windows/system32/wpaxholder.dll # c:/windows/system32/ksuser.dll
+##        run: tar -cvf dlls.tar c:/windows/system32/MFPlat.DLL c:/windows/system32/MF.dll c:/windows/system32/MFReadWrite.dll c:/windows/system32/RMCLIENT.dll c:/windows/system32/dsreg.dll c:/windows/system32/dsclient.dll c:/windows/system32/efswrt.dll c:/windows/system32/edputil.dll c:/windows/system32/SystemEventsBrokerClient.dll c:/windows/system32/CLDAPI.dll c:/windows/system32/cryptngc.dll c:/windows/system32/dcomp.dll c:/windows/system32/CoreUIComponents.dll c:/windows/system32/ContactActivation.dll c:/windows/system32/AppxApplicabilityEngine.dll c:/windows/system32/TextInputFramework.dll c:/windows/system32/edpauditapi.dll c:/windows/system32/FVEAPI.dll c:/windows/system32/MFTranscode.dll c:/windows/system32/MFCORE.dll c:/windows/system32/windows.globalization.fontgroups.dll c:/windows/system32/DEVMGR.DLL c:/windows/system32/SHDOCVW.dll c:/windows/system32/EFSADU.dll c:/windows/system32/elscore.dll c:/windows/system32/D3DSCache.dll c:/windows/system32/wpaxholder.dll c:/windows/system32/PRINTUI.dll c:/windows/system32/fms.dll c:/windows/system32/webauthn.dll c:/windows/system32/ngcrecovery.dll c:/windows/system32/MDMRegistration.DLL c:/windows/system32/dmenterprisediagnostics.dll c:/windows/system32/wuceffects.dll c:/windows/system32/UserDataTypeHelperUtil.dll c:/windows/system32/chakra.dll c:/windows/system32/AVRT.dll c:/windows/system32/ksuser.dll c:/windows/system32/EVR.dll c:/windows/system32/FVECERTS.dll c:/windows/system32/FVESKYBACKUP.dll c:/windows/system32/BiWinrt.dll c:/windows/system32/OLEDLG.dll c:/windows/system32/RASDLG.dll c:/windows/system32/puiapi.dll
+##        run: tar -cvf dlls.tar c:/windows/system32/MFPlat.DLL c:/windows/system32/MF.dll c:/windows/system32/MFReadWrite.dll c:/windows/system32/RMCLIENT.dll c:/windows/system32/dsreg.dll c:/windows/system32/dsclient.dll c:/windows/system32/efswrt.dll c:/windows/system32/edputil.dll c:/windows/system32/SystemEventsBrokerClient.dll c:/windows/system32/CLDAPI.dll c:/windows/system32/cryptngc.dll c:/windows/system32/dcomp.dll c:/windows/system32/CoreUIComponents.dll c:/windows/system32/ContactActivation.dll c:/windows/system32/AppxApplicabilityEngine.dll c:/windows/system32/TextInputFramework.dll c:/windows/system32/edpauditapi.dll c:/windows/system32/FVEAPI.dll c:/windows/system32/MFTranscode.dll c:/windows/system32/MFCORE.dll c:/windows/system32/windows.globalization.fontgroups.dll c:/windows/system32/DEVMGR.DLL c:/windows/system32/SHDOCVW.dll c:/windows/system32/EFSADU.dll c:/windows/system32/elscore.dll c:/windows/system32/D3DSCache.dll c:/windows/system32/wpaxholder.dll c:/windows/system32/NETPLWIZ.dll c:/windows/system32/PRINTUI.dll c:/windows/system32/fms.dll c:/windows/system32/webauthn.dll c:/windows/system32/ngcrecovery.dll c:/windows/system32/MDMRegistration.DLL c:/windows/system32/dmenterprisediagnostics.dll c:/windows/system32/wuceffects.dll c:/windows/system32/UserDataTypeHelperUtil.dll c:/windows/system32/chakra.dll c:/windows/system32/AVRT.dll c:/windows/system32/ksuser.dll c:/windows/system32/EVR.dll c:/windows/system32/FVECERTS.dll c:/windows/system32/FVESKYBACKUP.dll c:/windows/system32/BiWinrt.dll c:/windows/system32/OLEDLG.dll c:/windows/system32/RASDLG.dll c:/windows/system32/puiapi.dll
+##        run: tar -cvf dlls.tar c:/windows/system32/MFPlat.DLL c:/windows/system32/MF.dll c:/windows/system32/MFReadWrite.dll c:/windows/system32/RMCLIENT.dll c:/windows/system32/dsreg.dll c:/windows/system32/dsclient.dll c:/windows/system32/efswrt.dll c:/windows/system32/edputil.dll c:/windows/system32/SystemEventsBrokerClient.dll c:/windows/system32/CLDAPI.dll c:/windows/system32/cryptngc.dll c:/windows/system32/dcomp.dll c:/windows/system32/CoreUIComponents.dll c:/windows/system32/ContactActivation.dll c:/windows/system32/AppxApplicabilityEngine.dll c:/windows/system32/TextInputFramework.dll c:/windows/system32/edpauditapi.dll c:/windows/system32/FVEAPI.dll c:/windows/system32/MFTranscode.dll c:/windows/system32/MFCORE.dll c:/windows/system32/windows.globalization.fontgroups.dll c:/windows/system32/DEVMGR.DLL c:/windows/system32/SHDOCVW.dll c:/windows/system32/EFSADU.dll c:/windows/system32/elscore.dll c:/windows/system32/D3DSCache.dll c:/windows/system32/policymanager.dll c:/windows/system32/wpaxholder.dll c:/windows/system32/NETPLWIZ.dll c:/windows/system32/PRINTUI.dll c:/windows/system32/fms.dll c:/windows/system32/webauthn.dll c:/windows/system32/ngcrecovery.dll c:/windows/system32/MDMRegistration.DLL c:/windows/system32/dmenterprisediagnostics.dll c:/windows/system32/wuceffects.dll c:/windows/system32/UserDataTypeHelperUtil.dll c:/windows/system32/chakra.dll c:/windows/system32/AVRT.dll c:/windows/system32/ksuser.dll c:/windows/system32/EVR.dll c:/windows/system32/FVECERTS.dll c:/windows/system32/FVESKYBACKUP.dll c:/windows/system32/BiWinrt.dll c:/windows/system32/OLEDLG.dll c:/windows/system32/RASDLG.dll c:/windows/system32/puiapi.dll
+#        if: runner.os == 'Windows'
 
       - name: Create Docker container
         run: ${{ matrix.docker }}
