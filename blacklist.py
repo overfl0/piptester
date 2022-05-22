@@ -31,8 +31,8 @@ BLACKLIST = {
         # 'gitpython',
         # 'graphframes',  # SPARK_HOME
         # 'opencv-python',
-        # 'pycurl',  # libcurl
-        # 'pygobject',  # Msvc not supported https://gitlab.gnome.org/GNOME/pygobject/-/issues/454
+        'pycurl',  # libcurl
+        'pygobject',  # Msvc not supported https://gitlab.gnome.org/GNOME/pygobject/-/issues/454
         # 'xgboost',  # xgboost.dll
 
         # Bug in library / requirement unsatisfied
@@ -76,18 +76,18 @@ BLACKLIST = {
         'pywin32',
 
         # Requires DLL or external setup
-        #'fiona',
-        #'gitpython',
-        #'graphframes',  # SPARK_HOME
-        #'lightgbm',  # libgomp.so.1
-        #'mysqlclient',  # mysql_config not found
-        #'opencv-python',  # libGL.so.1
-        #'pattern',  # Requires mysqlclient
-        #'psycopg2',  # pg_config
-        #'pycairo',  # pkg-config
-        #'pycurl',  # curl-config
-        #'pygobject',  # Requires pycairo
-        #'python-magic',  # libmagic
+        # 'fiona',
+        # 'gitpython',
+        # 'graphframes',  # SPARK_HOME
+        # 'lightgbm',  # libgomp.so.1
+        # 'mysqlclient',  # mysql_config not found
+        # 'opencv-python',  # libGL.so.1
+        # 'pattern',  # Requires mysqlclient
+        # 'psycopg2',  # pg_config
+        # 'pycairo',  # pkg-config
+        # 'pycurl',  # curl-config
+        # 'pygobject',  # Requires pycairo
+        # 'python-magic',  # libmagic
 
         # Bug in library / requirement unsatisfied
         'flask-oidc',  # https://github.com/puiterwijk/flask-oidc/pull/141
@@ -95,15 +95,15 @@ BLACKLIST = {
         'imbalanced-learn',  # imports _joblib_parallel_args from the wrong place
 
         # Requires C++ compiler
-        #'backports.zoneinfo',
-        #'ciso8601',
-        #'pycrypto',
-        #'pyminizip',
-        #'pyodbc',
-        #'python-levenshtein',
-        #'sasl',
+        # 'backports.zoneinfo',
+        # 'ciso8601',
+        # 'pycrypto',
+        # 'pyminizip',
+        # 'pyodbc',
+        # 'python-levenshtein',
+        # 'sasl',
         'tensorflow-transform',  # Old pyarrow dependency which installs numpy
-        #'uwsgi',
+        # 'uwsgi',
 
         # "lolnope" doesn't work
         'constructs',
