@@ -38,8 +38,12 @@ def try_installing(package, linux=False):
     except KeyboardInterrupt:
         sys.exit(1)
 
-    # Re-mark as successful but this time along with the installation logs
-    if has_installed_successfully(package):
+    if b'WARNING: Discarding ' in output:
+        print(f'Marking package {package} as failed because it didn\'t install using the latest version')
+        mark_as_failed(package, output)
+
+    elif has_installed_successfully(package):
+        # Re-mark as successful but this time along with the installation logs
         mark_as_installed_successfully(package, output)
 
     # print(output.decode('utf8', 'replace'))

@@ -42,8 +42,6 @@ def has_installed_successfully(package):
 def mark_as_installed_successfully(package, output=b''):
     print(f'MARKING {package} AS SUCCESSFUL!')
     os.makedirs(MARK_INSTALLED_DIR, exist_ok=True)
-    if os.path.exists(MARK_INSTALLED_DIR):
-        print('Directory created successfully', flush=True)
 
     package_file = os.path.join(MARK_INSTALLED_DIR, package + '.txt')
     with open(package_file, 'wb') as f:
