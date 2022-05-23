@@ -6,8 +6,10 @@ BLACKLIST = {
         'azure-mgmt-datalake-nspkg',  # Empty namespace package
         'azure-mgmt-nspkg',  # Empty namespace package
         'azure-nspkg',  # Empty namespace package
+        'azure-storage',  # Deprecated, do not use
         'azureml-dataprep-rslex',  # Not intended for direct installation
         'bs4',  # Dummy package, use beautifulsoup4
+        'futures',  # Python 3 not supported
         'google-cloud',  # Deprecated empty package
         'sklearn',  # "Use scikit-learn instead"
         'tensorflow-io-gcs-filesystem',  # I THINK that this is not supposed to be used directly
@@ -66,8 +68,10 @@ BLACKLIST = {
         'azure-mgmt-datalake-nspkg',  # Empty namespace package
         'azure-mgmt-nspkg',  # Empty namespace package
         'azure-nspkg',  # Empty namespace package
+        'azure-storage',  # Deprecated, do not use
         'azureml-dataprep-rslex',  # Not intended for direct installation
         'bs4',  # Dummy package, use beautifulsoup4
+        'futures',  # Python 3 not supported
         'google-cloud',  # Deprecated empty package
         'sklearn',  # "Use scikit-learn instead"
         'tensorflow-io-gcs-filesystem',  # I THINK that this is not supposed to be used directly
