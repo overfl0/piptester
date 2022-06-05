@@ -1,3 +1,5 @@
+DISABLE_MSVC = False
+
 BLACKLIST = {
     'windows': {
         'azure',  # Marked as deprecated
@@ -46,16 +48,6 @@ BLACKLIST = {
         'pycrypto',  # "PyCrypto is dead" https://github.com/pycrypto/pycrypto/issues/238
 
         # Requires C++ compiler
-        # 'backports.zoneinfo',
-        # 'ciso8601',
-        # 'dbt-snowflake',
-        # 'netifaces',
-        # 'pyminizip',
-        # 'python-levenshtein',
-        # 'python-keystoneclient',  # Requires netifaces
-        # 'sasl', #!
-        # 'snowflake-connector-python',
-        # 'snowflake-sqlalchemy',  # Requires snowflake-connector-python
         'tensorflow-transform',  # Old pyarrow dependency which installs numpy
 
         # "lolnope" doesn't work
@@ -116,3 +108,17 @@ BLACKLIST = {
         'tfx-bsl',  # Wheels only 3.6-3.8 (win/lin)
     }
 }
+
+if DISABLE_MSVC:
+    BLACKLIST['windows'] = BLACKLIST['windows'].union({
+        'backports.zoneinfo',
+        'ciso8601',
+        'dbt-snowflake',
+        'netifaces',
+        'pyminizip',
+        'python-levenshtein',
+        'python-keystoneclient',  # Requires netifaces
+        'sasl',  #!
+        'snowflake-connector-python',
+        'snowflake-sqlalchemy',  # Requires snowflake-connector-python
+    })
