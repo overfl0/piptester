@@ -1,4 +1,6 @@
-DISABLE_MSVC = False
+# DISABLE_MSVC = False
+DISABLE_MSVC = True
+USE_SERVERCORE_IMAGE = True
 
 BLACKLIST = {
     'windows': {
@@ -121,4 +123,9 @@ if DISABLE_MSVC:
         'sasl',  #!
         'snowflake-connector-python',
         'snowflake-sqlalchemy',  # Requires snowflake-connector-python
+    })
+
+if USE_SERVERCORE_IMAGE:
+    BLACKLIST['windows'] = BLACKLIST['windows'].union({
+        'opencv-python',
     })
