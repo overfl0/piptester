@@ -22,6 +22,7 @@ BLACKLIST = {
         'ptyprocess',  # Requires fnctl
         'pystan',  # https://pystan2.readthedocs.io/en/latest/windows.html
         'python-daemon',  # Requires pwd module (also daemons are only on unix)
+        'sasl',  # Cyrus SASL on Windows is still laregely a "work in progress"
         'sekkaybot',  # Requires uvloop
         'sh',  # Requires fnctl
         'uvloop',  # Not supported on Windows
