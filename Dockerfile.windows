@@ -27,7 +27,7 @@ RUN dir c:\windows\system32\*140*
 #RUN sc config wuauserv start=demand
 #RUN dism.exe /online /quiet /norestart /Add-Capability /CapabilityName:Tools.Graphics.DirectX~~~~0.0.1.0
 
-COPY python/python-39-embed-amd64 python
+COPY python/python-310-embed-amd64 python
 
 ## Install build tools
 ## https://docs.microsoft.com/en-us/visualstudio/install/advanced-build-tools-container?view=vs-2019

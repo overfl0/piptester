@@ -3,4 +3,4 @@ FROM ubuntu
 RUN apt update
 RUN apt install -y clang
 
-COPY python/python-39-embed-linux64 python
+COPY python/python-310-embed-linux64 python
