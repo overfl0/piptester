@@ -25,6 +25,7 @@ BLACKLIST = {
         'dockerpty',  # Requires fnctl
         'ptyprocess',  # Requires fnctl
         'pystan',  # https://pystan2.readthedocs.io/en/latest/windows.html
+        'fbprophet',  # requires pystan
         'python-daemon',  # Requires pwd module (also daemons are only on unix)
         'sasl',  # Cyrus SASL on Windows is still laregely a "work in progress"
         'sekkaybot',  # Requires uvloop
