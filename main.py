@@ -56,7 +56,7 @@ def main(args):
         try_installing(PACKAGES_REAL_NAME.get(args.package, args.package), linux=args.linux)
         return
 
-    data = list(chunks(get_pypi_package_names()['rows'], 50))[args.chunk]
+    data = list(chunks(get_pypi_package_names()['rows'], 250))[args.chunk]
 
     for row in tqdm(data[:COUNT]):
         project = row['project']
