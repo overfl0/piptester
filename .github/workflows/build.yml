@@ -42,7 +42,7 @@ jobs:
 #        os: [windows-2019]
         os: [ubuntu-20.04, windows-2019]
 #        os: [ubuntu-20.04]
-        chunks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+        chunks: [0, 1, 2, 3, 4] #, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
         include:
           - os: windows-2019
 #            docker: docker build -f Dockerfile.windows -t piptester -m 4GB --build-arg BASE_IMAGE=mcr.microsoft.com/windows:1809 .
@@ -89,10 +89,14 @@ jobs:
       - name: Do installs
         run: python main.py --chunk ${{ matrix.chunks }}
 
+      - name: Compress logs
+        run: tar -jcf logs-${{ runner.os }}-${{ matrix.chunks }}.tbz logs/*
+
       - uses: actions/upload-artifact@v2
         with:
           name: Results
           path: |
-            logs
+            logs-*.tbz
+            # logs
           if-no-files-found: error
           retention-days: 30
