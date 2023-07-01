@@ -55,6 +55,6 @@ COPY python/python-310-embed-amd64 python
 ##        --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64\
 
 # Install chocolatey
-RUN powershell -NoProfile -ExecutionPolicy Bypass \
-        -Command "$env:ChocolateyUseWindowsCompression='false'; \
-         iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" \
+#RUN powershell -NoProfile -ExecutionPolicy Bypass \
+#        -Command "$env:ChocolateyUseWindowsCompression='false'; \
+#         iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" \
