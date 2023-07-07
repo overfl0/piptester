@@ -12,6 +12,7 @@ BLACKLIST = {
         'azure-nspkg',  # Empty namespace package
         'azure-storage',  # Deprecated, do not use
         'azureml-dataprep-rslex',  # Not intended for direct installation
+        'botocore-stubs',  # Just stubs, no code, nothing to test
         'bs4',  # Dummy package, use beautifulsoup4
         'futures',  # Python 3 not supported
         'google-cloud',  # Deprecated empty package
@@ -54,7 +55,6 @@ BLACKLIST = {
         'tensorflow-transform',  # Old pyarrow dependency which installs numpy
 
         # "lolnope" doesn't work
-        'constructs',
         'tfx-bsl',  # Wheels only 3.6-3.8 (win/lin)
     },
     'linux': {
@@ -106,7 +106,6 @@ BLACKLIST = {
         # 'uwsgi',
 
         # "lolnope" doesn't work
-        'constructs',
         'sekkaybot',  # Some kind of personal bot or sth...
         'tfx-bsl',  # Wheels only 3.6-3.8 (win/lin)
     }
