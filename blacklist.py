@@ -95,6 +95,8 @@ BLACKLIST = {
         'tensorflow-transform',  # Old pyarrow dependency which installs numpy
         # 'uwsgi',
 
+        'nvidia-cudnn-cu11',  # Only C lib files. Hard to check
+
         # Fails to compile
         'backports.zoneinfo',  # Wontfix
     }

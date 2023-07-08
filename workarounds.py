@@ -57,7 +57,7 @@ CUSTOM_PACKAGE_REQUIREMENTS = {
     'opensearch-py': ['requests'],
     'jupyterlab-pygments': ['pygments'],
     'keras': ['tensorflow'],
-    'pydeequ': ['pyspark'],  # TODO: Spark version
+    'pydeequ': ['pyspark'],
     'graphframes': ['pyspark'],
     'jupyter-server-terminals': ['jupyter-server'],
     'nvidia-cudnn-cu11': ['nvidia-pyindex'],
