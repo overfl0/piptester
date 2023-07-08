@@ -61,7 +61,7 @@ def main(args):
     for row in tqdm(data[:COUNT]):
         project = row['project']
         project = PACKAGES_REAL_NAME.get(project, project)
-        if project in BLACKLIST[CURRENT_OS]:
+        if project in BLACKLIST['both'] or project in BLACKLIST[CURRENT_OS]:
             continue
 
         if has_installed_successfully(project):
