@@ -45,6 +45,7 @@ PACKAGE_IMPORT_NAME = {
     'protobuf': 'google.protobuf',
     'pypdf2': 'PyPDF2',
     'pystan': 'stan',
+    'python-levenshtein': 'Levenshtein',
     'python-multipart': 'multipart',
     'ruamel.yaml.clib': '_ruamel_yaml',
     'scikit-image': 'skimage',
