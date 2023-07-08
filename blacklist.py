@@ -35,6 +35,7 @@ BLACKLIST = {
         'sasl',  # Cyrus SASL on Windows is still laregely a "work in progress"
         'sekkaybot',  # Requires uvloop
         'sh',  # Requires fnctl
+        'triton',  # Not supported on Windows
         'uvloop',  # Not supported on Windows
         'uwsgi',  # Not supported on Windows
 
