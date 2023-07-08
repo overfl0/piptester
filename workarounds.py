@@ -59,7 +59,7 @@ CUSTOM_PACKAGE_REQUIREMENTS = {
     'mypy-boto3-s3': ['boto3'],
     'ruamel.yaml.clib': ['ruamel.yaml'],
     'soupsieve': ['beautifulsoup4'],
-    'spark-nlp': ['pyspark'],
+    'spark-nlp': ['pyspark', 'numpy'],
     'telethon-session-sqlalchemy': ['telethon'],
     'tensorflow-addons': ['tensorflow'],
     'tensorflow-estimator': ['six', 'tensorflow'],

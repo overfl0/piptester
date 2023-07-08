@@ -81,7 +81,21 @@ def guess_import_name(package):
 def test_package(package):
     import_name = guess_import_name(package)
     print(f'Importing {import_name}...', flush=True)
-    importlib.import_module(import_name)
+
+    running_helper = None
+    try:
+        running = importlib.import_module(f'running.{package}')
+        running_helper = getattr(running, CURRENT_OS)
+    except ModuleNotFoundError:
+        pass
+    except AttributeError:
+        pass
+
+    if running_helper:
+        running_helper()
+    else:
+        importlib.import_module(import_name)
+
     mark_as_installed_successfully(package)
 
 
