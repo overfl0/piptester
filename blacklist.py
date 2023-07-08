@@ -24,6 +24,8 @@ BLACKLIST = {
         'ansible-core',  # Doesn't support windows
         'blessings',  # Requires curses
         'dockerpty',  # Requires fnctl
+        'nvidia-cudnn-cu11',  # Doesn't seem to have wheels for windows
+        'nvidia-nccl-cu11',  # Doesn't seem to have wheels for windows
         'ptyprocess',  # Requires fnctl
         'pystan',  # https://pystan2.readthedocs.io/en/latest/windows.html
         'fbprophet',  # requires pystan

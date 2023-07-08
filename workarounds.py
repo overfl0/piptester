@@ -35,8 +35,11 @@ PACKAGE_IMPORT_NAME = {
     'pymupdf': 'fitz',
     'poetry-core': 'poetry.core',
     'protobuf': 'google.protobuf',
+    'pypdf2': 'PyPDF2',
     'pystan': 'stan',
+    'python-multipart': 'multipart',
     'ruamel.yaml.clib': '_ruamel_yaml',
+    'scikit-image': 'skimage',
 }
 
 # Packages which are needed, but are missing, for some reason
@@ -47,6 +50,7 @@ CUSTOM_PACKAGE_REQUIREMENTS = {
     'pydeequ': ['pyspark'],  # TODO: Spark version
     'graphframes': ['pyspark'],
     'jupyter-server-terminals': ['jupyter-server'],
+    'nvidia-cudnn-cu11': ['nvidia-pyindex'],
     'matplotlib-inline': ['matplotlib', 'ipython'],
     'ml-dtypes': ['wheelhouse'],
     'mypy-boto3-appflow': ['botocore'],
