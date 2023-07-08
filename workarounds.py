@@ -48,6 +48,7 @@ PACKAGE_IMPORT_NAME = {
     'python-multipart': 'multipart',
     'ruamel.yaml.clib': '_ruamel_yaml',
     'scikit-image': 'skimage',
+    'tensorflow': 'tensorflow',
 }
 
 # Packages which are needed, but are missing, for some reason
@@ -65,6 +66,7 @@ CUSTOM_PACKAGE_REQUIREMENTS = {
     'mypy-boto3-rds': ['botocore'],
     'mypy-boto3-redshift-data': ['botocore'],
     'mypy-boto3-s3': ['boto3'],
+    'qtpy': ['PyQt5'],
     'ruamel.yaml.clib': ['ruamel.yaml'],
     'soupsieve': ['beautifulsoup4'],
     'spark-nlp': ['pyspark', 'numpy'],
