@@ -32,6 +32,14 @@ PACKAGE_IMPORT_NAME = {
     'jpype1': 'jpype',
     'markdown-it-py': 'markdown_it',
     'oldest-supported-numpy': 'numpy',
+    'opentelemetry-api': 'opentelemetry',
+    'opentelemetry-exporter-otlp': 'opentelemetry.exporter.otlp.proto.grpc',
+    'opentelemetry-exporter-otlp-proto-grpc': 'opentelemetry.exporter.otlp.proto.grpc',
+    'opentelemetry-exporter-otlp-proto-http': 'opentelemetry.exporter.otlp.proto.http',
+    'opentelemetry-instrumentation': 'opentelemetry.instrumentation',
+    'opentelemetry-proto': 'opentelemetry.proto',  # No actual code, just configs
+    'opentelemetry-semantic-conventions': 'opentelemetry.semconv',  # No actual code, just configs
+    'opentelemetry-sdk': 'opentelemetry.sdk',
     'pymupdf': 'fitz',
     'poetry-core': 'poetry.core',
     'protobuf': 'google.protobuf',
