@@ -53,7 +53,6 @@ BLACKLIST = {
         'fiona',
         'geopandas',  # Requires fiona
         # 'gitpython',
-        # 'graphframes',  # SPARK_HOME
         # 'opencv-python',
         'pycurl',  # libcurl
         'pygobject',  # Msvc not supported https://gitlab.gnome.org/GNOME/pygobject/-/issues/454
@@ -76,7 +75,6 @@ BLACKLIST = {
         # Requires DLL or external setup
         # 'fiona',
         # 'gitpython',
-        # 'graphframes',  # SPARK_HOME
         # 'lightgbm',  # libgomp.so.1
         # 'mysqlclient',  # mysql_config not found
         # 'opencv-python',  # libGL.so.1
@@ -88,7 +86,6 @@ BLACKLIST = {
         # 'python-magic',  # libmagic
 
         # Requires C++ compiler
-        # 'backports.zoneinfo',
         # 'ciso8601',
         # 'pycrypto',
         # 'pyminizip',
@@ -97,6 +94,9 @@ BLACKLIST = {
         # 'sasl',
         'tensorflow-transform',  # Old pyarrow dependency which installs numpy
         # 'uwsgi',
+
+        # Fails to compile
+        'backports.zoneinfo',  # Wontfix
     }
 }
 
