@@ -12,11 +12,13 @@ BLACKLIST = {
         'azure-nspkg',  # Empty namespace package
         'azure-storage',  # Deprecated, do not use
         'azureml-dataprep-rslex',  # Not intended for direct installation
-        'botocore-stubs',  # Just stubs, no code, nothing to test
+        'botocore-stubs',  # Just mypy stubs, no code, nothing to test
         'bs4',  # Dummy package, use beautifulsoup4
         'futures',  # Python 3 not supported
         'google-cloud',  # Deprecated empty package
         'sklearn',  # "Use scikit-learn instead"
+        'types-s3transfer',  # Just mypy stubs, no code, nothing to test
+        'types-awscrt',  # Just mypy stubs, no code, nothing to test
         'tensorflow-io-gcs-filesystem',  # I THINK that this is not supposed to be used directly
 
         # Not supported on Windows
