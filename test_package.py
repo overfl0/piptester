@@ -65,7 +65,10 @@ def guess_import_name(package):
         if import_name.startswith('python-') and import_name[7:] in lines:
             return import_name[7:]
 
-        return lines[-1]
+        if lines:
+            return lines[-1]
+        else:
+            print('Empty top_level.txt file, guessing module name:', import_name)
 
     except FileNotFoundError:
         print('Could not find the top_level.txt file, guessing module name:', import_name)
